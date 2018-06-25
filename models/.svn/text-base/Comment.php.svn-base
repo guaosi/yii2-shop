@@ -1,0 +1,52 @@
+<?php
+/**
+ * Create By guaosi
+ * Author guaosi
+ * Date: 2017/8/24/0024
+ * Time: 15:51
+ */
+namespace app\models;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+class Comment extends ActiveRecord
+{
+    public function behaviors()
+    {
+        return [
+            [
+                'class'=>TimestampBehavior::className(),
+                'createdAtAttribute'=>'createtime',
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_INSERT=>['createtime'],
+                ]
+            ]
+        ];
+    }
+    public static function tableName()
+    {
+        return "{{%comment}}";
+    }
+    public function rules()
+    {
+        return [
+            ['product_id','required', 'message' => '商品id不能为空'],
+            ['user_id','required', 'message' => '用户id不能为空'],
+            ['score','required', 'message' => '星级不能为空'],
+            ['content','required', 'message' => '评论内容不能为空'],
+            ['content', 'string', 'length' => [3, 600],'message' => '评论内容为3-600之间'],
+            ['score', 'in', 'range' => [1, 2, 3,4,5],'message'=>'星级必须在1-5之间'],
+        ];
+    }
+    public function add($data)
+    {
+        $this->load($data);
+        if($this->validate())
+        {
+            if($this->save(false))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+}

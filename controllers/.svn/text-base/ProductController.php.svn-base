@@ -1,0 +1,153 @@
+<?php
+/**
+ * Create By guaosi
+ * Author guaosi
+ * Date: 2017/8/18/0018
+ * Time: 15:48
+ */
+namespace app\controllers;
+use app\models\Category;
+use app\models\Product;
+use app\models\ProductSearch;
+use Yii;
+use yii\data\Pagination;
+class ProductController extends CommonController
+{
+    protected $except=['index','detail','search'];
+    public $layout=true;
+    public function actionIndex()
+    {
+
+        $this->layout='layout2';
+        $cateid=Yii::$app->request->get('cateid');
+        if($cateid)
+        {
+            $category=new Category();
+            $cateids=$category->getChildren($cateid);
+            $cateids[]=$cateid;
+            $cateid=implode(',',$cateids);
+
+           $where="cateid in ($cateid) and ison='1'";
+           $param=[];
+
+        }
+        else
+        {
+            $where="ison='1'";
+            $param=[];
+        }
+
+        $product=Product::find()->where($where,$param);
+        $count=$product->count();
+        $pageSize=Yii::$app->params['pageSize']['IndexProductSize'];
+        $pager=new Pagination(['totalCount'=>$count,'pageSize'=>$pageSize]);
+        $products=$product->offset($pager->offset)->limit($pager->limit)->all();
+
+        $dep=new \yii\caching\DbDependency([
+            'sql'=>"select max(updatetime) from {{%product}} where $where",
+            'params'=>[':id'=>$cateid]
+        ]);
+        $tui=Product::getDb()->cache(function () use($where,$param){
+            return Product::find()->where($where." and istui='1'",$param)->limit(6)->orderBy('createtime desc')->all();
+        },60*5,$dep);
+//        $tui=Product::find()->where($where." and istui='1'",$param)->limit(6)->orderBy('createtime desc')->all();
+        $hot=Product::getDb()->cache(function () use($where,$param){
+            return Product::find()->where($where." and ishot='1'",$param)->limit(8)->orderBy('createtime desc')->all();
+        },60*5,$dep);
+//        $hot= Product::find()->where($where." and ishot='1'",$param)->limit(8)->orderBy('createtime desc')->all();
+        $sale=Product::getDb()->cache(function() use($where,$param){
+            return Product::find()->where($where." and issale='1'",$param)->limit(6)->orderBy('createtime desc')->all();
+        },60*5,$dep);
+//        $sale=Product::find()->where($where." and issale='1'",$param)->limit(6)->orderBy('createtime desc')->all();
+        $page=Yii::$app->request->get('page')?Yii::$app->request->get('page'):1;
+        return $this->render('index',compact('products','pager','page','pageSize','tui','hot','sale','count'));
+    }
+    public function actionDetail()
+    {
+        $this->layout='layout2';
+        $productid=Yii::$app->request->get('productid');
+        $dep=new \yii\caching\DbDependency([
+            'sql'=>'select max(updatetime) from {{%product}} where productid=:pid',
+            'params'=>[':pid'=>$productid]
+        ]);
+        $product=Product::getDb()->cache(function () use($productid){
+            return Product::find()->where('productid=:pid',['pid'=>$productid])->one();
+        },60*5,$dep);
+//        浏览历史
+        if (empty($product))
+        {
+           $this->redirect(['index/index']);
+           Yii::$app->end();
+        }
+
+        $cookie = \Yii::$app->request->cookies;
+        if($cookie->has('producthistory'))
+        {
+            $prohistory=implode(',',json_decode($cookie->getValue('producthistory',[])));
+            $sql="SELECT * FROM `shop_product` WHERE productid in ($prohistory) and ison='1'  ORDER BY field(productid, $prohistory)";
+            $data['historyproduct']=\Yii::$app->getDb()->cache(function()use($sql){
+                return \Yii::$app->getDb()->createCommand($sql)->queryAll();
+            },60*5);
+        }
+          Product::viewHistory($productid);
+        return $this->render('detail',compact('product','data'));
+    }
+    public function actionSearch()
+    {
+        $this->layout='layout2';
+        $keyword=Yii::$app->request->get('key_word');
+        if (empty($keyword))
+        {
+            $this->redirect(['product/index']);
+            Yii::$app->end();
+        }
+//        过滤
+        $highlight=[
+            "pre_tags"=>["<span style='color: red'>"],
+            'post_tags'=>['</span>'],
+            'fields'=>[
+                'title'=>new \stdClass(),
+                'descr'=>new \stdClass()
+            ]
+        ];
+        $keyword=htmlspecialchars($keyword);
+        $productmodel=ProductSearch::find()->query([
+            'multi_match'=>[
+                'query'=>$keyword,
+                'fields'=>['title','descr']
+            ]
+        ]);
+        $count=$productmodel->count();
+        $pageSize=Yii::$app->params['pageSize']['IndexProductSize'];
+        $pager=new Pagination(['totalCount'=>$count,'pageSize'=>$pageSize]);
+        $res=$productmodel->highlight($highlight)->offset($pager->offset)->limit($pager->limit)->all();
+        $productids=[];
+        $productdetail=[];
+        foreach ($res as $result)
+        {
+            $productids[]=$result->productid;
+            $productdetail[$result->productid]['title']=empty($result->highlight['title'][0])?'':$result->highlight['title'][0];
+            $productdetail[$result->productid]['descr']=empty($result->highlight['descr'][0])?'':$result->highlight['descr'][0];
+        }
+        $productids=implode(',',$productids);
+        $products=[];
+        if (!empty($productids))
+        {
+
+            $resultpros=Product::find()->where("productid in ($productids)")->all();
+            foreach ($resultpros as $result)
+            {
+                $result->title=empty($productdetail[$result->productid]['title'])?$result->title:$productdetail[$result->productid]['title'];
+                $result->descr=empty($productdetail[$result->productid]['descr'])?$result->descr:$productdetail[$result->productid]['descr'];
+                $products[]=$result;
+            }
+        }
+        $where="ison='1'";
+        $param=[];
+        $tui=Product::find()->where($where." and istui='1'",$param)->limit(6)->orderBy('createtime desc')->all();
+        $hot= Product::find()->where($where." and ishot='1'",$param)->limit(8)->orderBy('createtime desc')->all();
+        $sale=Product::find()->where($where." and issale='1'",$param)->limit(6)->orderBy('createtime desc')->all();
+        $page=Yii::$app->request->get('page')?Yii::$app->request->get('page'):1;
+        return $this->render('index',compact('products','pager','page','pageSize','tui','hot','sale','count'));
+    }
+}

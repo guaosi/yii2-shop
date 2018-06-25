@@ -1,0 +1,92 @@
+10
+
+dir
+2
+svn://118.89.20.47:3690/shopyii.guaosi.com.cn/vendor/yiisoft
+svn://118.89.20.47:3690
+
+
+
+2017-12-15T07:51:33.902232Z
+1
+root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+05e21276-f5ee-45a1-9439-117ec18ac556
+
+yii2-debug
+dir
+
+yii2-redis
+dir
+
+yii2-swiftmailer
+dir
+
+yii2-composer
+dir
+
+yii2-faker
+dir
+
+yii2-gii
+dir
+
+yii2-elasticsearch
+dir
+
+extensions.php
+file
+
+
+
+
+2017-12-15T08:10:56.000000Z
+ea6c3ea933dd5d6032c70caa3b9c96f9
+2017-12-15T07:51:33.902232Z
+1
+root
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2653
+
+yii2-codeception
+dir
+
+yii2-bootstrap
+dir
+
+yii2
+dir
+

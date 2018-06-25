@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=127.0.0.1;dbname=shopyii',
+    'username' => 'shopyii',
+    'password' => 'Gx624249423',
+    'charset' => 'utf8',
+    'tablePrefix'=>'shop_'
+];

@@ -1,0 +1,260 @@
+<?php
+use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+$this->title='订单确认';
+?>
+    <!-- ============================================================= HEADER : END ============================================================= -->		<!-- ========================================= CONTENT ========================================= -->
+
+    <section id="checkout-page">
+        <div class="container">
+            <div class="col-xs-12 no-margin">
+                <section id="shipping-address" style="margin-bottom:100px;margin-top:-10px">
+                        <h2 class="border h1">收货地址</h2>
+                        <a href="javaScript:;" id="createlink">新建联系人</a>
+                         <?php if($addresses):?>
+                          <?php for($i=0;$i<count($addresses);$i++):?>
+                        <div class="row field-row" style="margin-top:10px">
+                            <div class="col-xs-12">
+                                <input  class="le-radio big addressradio" type="radio" name="address" value="<?=$addresses[$i]['addressid']?>" <?php if($i==0):?>checked="checked"<?php endif;?>/>
+                                <a class="simple-link bold" href="javaScript:;"><?=$addresses[$i]['address']?>&nbsp;&nbsp;<?=$addresses[$i]['firstname']?> <?=$addresses[$i]['lastname']?>&nbsp;&nbsp;<?=$addresses[$i]['telephone']?></a>
+                            </div>
+                            <a address-id="<?=$addresses[$i]['addressid']?>" class="addressdel" style="margin-left:45px" href="javaScript:;">删除</a>
+                        </div><!-- /.field-row -->
+                             <?php endfor;?>
+                         <?php endif;?>
+                </section><!-- /#shipping-address -->
+
+                <div class="billing-address" style="display:none;">
+                    <h2 class="border h1">新建联系人</h2>
+                    <?php ActiveForm::begin([
+                        'action' => ['address/add'],
+                        'options'=>['id'=>'address-new']
+                    ]); ?>
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label>姓*</label>
+                                <input class="le-input" name="firstname">
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label>名*</label>
+                                <input class="le-input" name="lastname">
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label>地址*</label>
+                                <input name="firstaddress" class="le-input" data-placeholder="例如：北京市朝阳区" >
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label>&nbsp;</label>
+                                <input name="lastaddress" class="le-input" data-placeholder="例如：酒仙桥北路" >
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <div class="row field-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label>邮编*</label>
+                                <input class="le-input" name="postcode" >
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label>联系电话*</label>
+                                <input class="le-input" name="telephone">
+                            </div>
+                        </div><!-- /.field-row -->
+
+                        <!--<div class="row field-row">
+                            <div id="create-account" class="col-xs-12">
+                                <input  class="le-checkbox big" type="checkbox"  />
+                                <a class="simple-link bold" href="#">新建联系人？</a>
+                            </div>
+                        </div>--><!-- /.field-row -->
+
+                        <div class="place-order-button">
+                            <button  class="le-button small addressbtn" type="button">新建</button>
+                            <button  class="le-button small addressclosebtn" type="button">关闭</button>
+                        </div><!-- /.place-order-button -->
+                    <?php ActiveForm::end(); ?>
+                </div><!-- /.billing-address -->
+
+                <?php ActiveForm::begin([
+                    'action' => ['order/add'],
+                    'options'=> ['id' => 'orderconfirm'],
+                ]); ?>
+                <section id="your-order">
+                    <h2 class="border h1">您的订单详情</h2>
+                        <?php foreach ($products as $val):?>
+                        <div class="row no-margin order-item">
+                            <div class="col-xs-12 col-sm-1 no-margin">
+                                <a href="javaScript:;" class="qty"><?=$val->productnum?> x</a>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-9 ">
+                                <div class="title">
+                                <a href="<?=Url::to(['product/detail','productid'=>$val->product['0']->productid])?>" target="_blank" class="thumb-holder">
+                                    <img class="lazy" alt="<?=$val->product['0']->title?>" src="http://<?=$val->product['0']->cover?>-cobersamall" />
+                                </a>
+                                <a  target="_blank" style="margin-left:50px" href="<?=Url::to(['product/detail','productid'=>$val->product['0']->productid])?>"><?=$val->product['0']->title?></a>
+<!--                                <div class="brand">sony</div>-->
+                                </div>
+                            </div>
+                            <?php $price=$val->product['0']->issale?$val->product['0']->saleprice:$val->product['0']->price?>
+                            <div class="col-xs-12 col-sm-2 no-margin">
+                                <div class="price"> ￥ <?=$price?></div>
+                            </div>
+                        </div><!-- /.order-item -->
+                        <?php endforeach;?>
+                </section><!-- /#your-order -->
+
+                <div id="total-area" class="row no-margin">
+                    <div class="col-xs-12 col-lg-4 col-lg-offset-8 no-margin-right">
+                        <div id="subtotal-holder">
+                            <ul class="tabled-data inverse-bold no-border">
+                                <li>
+                                    <label>商品总价</label>
+                                    <div style="width:100%;text-align:right" class="value ordervalue" price-id="<?=$this->params['footer']['carttotalprice']?>">￥ <span><?=number_format($this->params['footer']['carttotalprice'], 2)?></span></div>
+                                </li>
+                                <li>
+                                    <label>选择快递</label>
+                                    <div style="width:100%;text-align:right" class="value">
+                                        <div class="radio-group">
+                                            <?php
+                                            $express=Yii::$app->params['express'];
+                                            $expressPrice=Yii::$app->params['expressPrice'];
+                                            ?>
+                                        <?php for($i=0;$i<count($express);$i++):?>
+
+                                            <input <?if($i==0):?>checked="checked"<?php endif;?> class="le-radio expressradio" type="radio" name="express" value="<?=$i?>">
+                                            <div class="radio-label bold">
+                                                <?=$express[$i]?>
+                                                <span class="bold"> ￥                                                                      <span class="ordertotalprice"><?=$expressPrice[$i]?></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        <?php endfor;?>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul><!-- /.tabled-data -->
+
+                            <ul id="total-field" class="tabled-data inverse-bold ">
+                                <li>
+                                    <label>订单总额</label>
+                                    <div class="value" style="width:100%;text-align:right">￥ <span class="orderallprice"><?=number_format($this->params['footer']['carttotalprice']+$expressPrice[0], 2)?></span></div>
+                                </li>
+                            </ul><!-- /.tabled-data -->
+
+                        </div><!-- /#subtotal-holder -->
+                    </div><!-- /.col -->
+                </div><!-- /#total-area -->
+
+                <div id="payment-method-options">
+                        <div class="payment-method-option">
+                            <input checked="checked" class="le-radio" type="radio" name="paytype">
+                            <div class="radio-label bold ">支付宝支付</div>
+                        </div><!-- /.payment-method-option -->
+                </div><!-- /#payment-method-options -->
+
+                <div class="place-order-button">
+                    <button class="le-button big">确认订单</button>
+                </div><!-- /.place-order-button -->
+                <input type="hidden" name="submitaddressid" value="<?php if($addresses){echo $addresses[0]['addressid'];}?>" id="submitaddress">
+            </div><!-- /.col -->
+        </div><!-- /.container -->
+    </section><!-- /#checkout-page -->
+    <!-- ========================================= CONTENT : END ========================================= -->		<!-- ============================================================= FOOTER ============================================================= -->
+<?php ActiveForm::end(); ?>
+<script>
+    $(function () {
+        $('#top-cart-row-close').remove();
+//        快递选择
+        $('.expressradio').click(function () {
+            var val=parseInt($(this).next().next().find('.ordertotalprice').html());
+            var productvalue=parseFloat($('.ordervalue').attr('price-id'));
+            var totalprice=productvalue+val;
+            totalprice=addComma(totalprice.toString());
+            $('.orderallprice').html(totalprice);
+        });
+        var addressflag=false;
+//        新建联系人下拉框
+        $("#createlink").click(function(){
+            if(!addressflag)
+            {
+                $(".billing-address").slideDown();
+                addressflag=true;
+            }
+            else
+            {
+                $(".billing-address").hide();
+                addressflag=false;
+            }
+
+        });
+//        新建地址
+        $('.addressbtn').click(function () {
+            $(".billing-address").hide();
+            addressflag=false;
+            var postData=$('#address-new').serialize();
+            $.ajax({
+                url:"<?=Url::to(['address/add'])?>",
+                type:'post',
+                data:postData,
+                dataType:'json',
+                success:function (res) {
+                    if(!res.errorCode)
+                    {
+                        alert(res.msg);
+                    }
+                    else
+                    {
+                        var addressid=res.address;
+                        var firstname=$("input[name=firstname]").val();
+                        var lastname=$("input[name=lastname]").val();
+                        var totalAddress=$("input[name=firstaddress]").val()+$("input[name=lastaddress]").val();
+                        var telephone=$("input[name=telephone]").val();
+                        var str="<div class='row field-row' style='margin-top:10px'><div class='col-xs-12'><input  class='le-radio big' type='radio' name='address'/><i class='fake-box'></i><a class='simple-link bold' href='javaScript:;'> "+totalAddress+"&nbsp;&nbsp;"+firstname+" "+lastname+"&nbsp;&nbsp;"+telephone+"</a></div><a address-id='"+addressid+"'class='addressdel' style='margin-left:45px' href='javaScript:;'>删除</a></div>"
+                         $('#shipping-address').append(str);
+
+
+
+
+                    }
+                }
+            })
+        });
+        $('.addressclosebtn').click(function () {
+            $(".billing-address").hide();
+            addressflag=false;
+        })
+//        删除地址
+        $('.addressdel').click(function () {
+            if(confirm('是否要删除这个地址?'))
+            {
+                var addressid=$(this).attr('address-id');
+                var csrfToken = $('meta[name="csrf-token"]').attr("content");
+                var that=$(this);
+                $.ajax({
+                    url:"<?=Url::to(['address/del'])?>",
+                    type:'post',
+                    data:{_csrf:csrfToken,addressid:addressid},
+                    dataType:'json',
+                    success:function (res) {
+                        if(!res.errorCode)
+                        {
+                            alert(res.msg);
+                        }
+                        else
+                        {
+                            that.parent().remove();
+                        }
+                    }
+                })
+            }
+        });
+//        隐藏域改变值
+        $('.addressradio').change(function () {
+            $('#submitaddress').val($(this).val());
+        })
+    })
+</script>

@@ -1,0 +1,75 @@
+<?php
+use yii\helpers\Url;
+$this->title='商品列表';
+$this->params['breadcrumbs'][]='> '.$this->title;
+?>
+        <!-- main container -->
+
+            <div class="container-fluid">
+                <div id="pad-wrapper" class="users-list">
+                    <div class="row-fluid header">
+                        <h3>商品列表</h3>
+                        <div class="span10 pull-right">
+                            <a href="<?=Url::to(['product/add'])?>" class="btn-flat success pull-right">
+                                <span>&#43;</span>添加新商品</a></div>
+                    </div>
+                    <!-- Users table -->
+                    <div class="row-fluid table">
+                        <?php if(Yii::$app->session->hasFlash('info')){echo Yii::$app->session->getFlash('info');}?>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="span6 sortable">
+                                        <span class="line"></span>商品名称</th>
+                                    <th class="span2 sortable">
+                                        <span class="line"></span>商品库存</th>
+                                    <th class="span2 sortable">
+                                        <span class="line"></span>商品单价</th>
+                                    <th class="span2 sortable">
+                                        <span class="line"></span>是否热卖</th>
+                                    <th class="span2 sortable">
+                                        <span class="line"></span>是否促销</th>
+                                    <th class="span2 sortable">
+                                        <span class="line"></span>促销价</th>
+                                    <th class="span2 sortable">
+                                        <span class="line"></span>是否上架</th>
+                                    <th class="span2 sortable">
+                                        <span class="line"></span>是否推荐</th>
+                                    <th class="span3 sortable align-right">
+                                        <span class="line"></span>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- row -->
+                                <?php foreach ($products as $product):?>
+                                <tr class="first">
+                                    <td>
+                                        <img src="http://<?=$product->cover?>-cobersamall" />
+                                        <a href="<?=Url::to(['product/detail','productid'=>$product->productid])?>" class="name"><?=$product->title?></a></td>
+                                    <td><?=$product->num?></td>
+                                    <td><?=$product->price?> 元</td>
+                                    <td><?=$product->ishot?'热卖':'不热卖'?></td>
+                                    <td><?=$product->issale?'促销':'不促销'?></td>
+                                    <td><?=$product->saleprice?> 元</td>
+                                    <td><?=$product->ison?'上架':'下架'?></td>
+                                    <td><?=$product->istui?'推荐':'不推荐'?></td>
+                                    <td class="align-right">
+                                        <a href="<?=Url::to(['product/mod','productid'=>$product->productid])?>">编辑</a>
+                                        <?php if($product->ison):?>
+                                            <a href="<?=Url::to(['product/change','productid'=>$product->productid,'action'=>0])?>">下架</a>
+                                        <?php else:?>
+                                            <a href="<?=Url::to(['product/change','productid'=>$product->productid,'action'=>1])?>">上架</a>
+                                        <?php endif?>
+                                        <a href="<?=Url::to(['product/del','productid'=>$product->productid])?>">删除</a></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination pull-right">
+                        <?=yii\widgets\LinkPager::widget(['pagination'=>$pager,'prevPageLabel'=>'&#8249','nextPageLabel'=>'&#8250'])?>
+                    </div>
+                    <!-- end users table --></div>
+            </div>
+
+        <!-- end main container -->

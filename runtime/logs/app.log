@@ -1,0 +1,311 @@
+2018-06-15 17:49:29 [-][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: exec() has been disabled for security reasons in /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/helpers/BaseConsole.php:631
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'exec() has been...', '/home/wwwroot/s...', 631, Array)
+#1 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/helpers/BaseConsole.php(631): exec('stty -a 2>&1', Array)
+#2 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/helpers/BaseConsole.php(682): yii\helpers\BaseConsole::getScreenSize(false)
+#3 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/controllers/HelpController.php(323): yii\helpers\BaseConsole::wrapText('Allows you to c...', 31)
+#4 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/controllers/HelpController.php(67): yii\console\controllers\HelpController->getDefaultHelp()
+#5 [internal function]: yii\console\controllers\HelpController->actionIndex(NULL)
+#6 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#7 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Controller.php(148): yii\base\Controller->runAction('', Array)
+#9 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('', Array)
+#10 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('', Array)
+#11 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('', Array)
+#12 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#13 /home/wwwroot/shopyii.guaosi.com/yii(20): yii\base\Application->run()
+#14 {main}
+2018-06-15 17:49:29 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HOSTNAME' => 'VM_0_17_centos'
+    'TERM' => 'xterm'
+    'SHELL' => '/bin/bash'
+    'HISTSIZE' => '3000'
+    'SSH_CLIENT' => '106.122.0.209 46059 22'
+    'SSH_TTY' => '/dev/pts/2'
+    'USER' => 'root'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:'
+    'MAIL' => '/var/spool/mail/root'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin'
+    'PWD' => '/home/wwwroot/shopyii.guaosi.com'
+    'LANG' => 'en_US.utf8'
+    'SHLVL' => '1'
+    'HOME' => '/root'
+    'LOGNAME' => 'root'
+    'CVS_RSH' => 'ssh'
+    'SSH_CONNECTION' => '106.122.0.209 46059 172.16.0.17 22'
+    'LESSOPEN' => '||/usr/bin/lesspipe.sh %s'
+    'PROMPT_COMMAND' => 'history -a; printf \"\\033]0;%s@%s:%s\\007\" \"${USER}\" \"${HOSTNAME%%.*}\" \"${PWD/#$HOME/~}\"'
+    'HISTTIMEFORMAT' => '%F %T '
+    'G_BROKEN_FILENAMES' => '1'
+    '_' => './yii'
+    'OLDPWD' => '/home/wwwroot'
+    'PHP_SELF' => './yii'
+    'SCRIPT_NAME' => './yii'
+    'SCRIPT_FILENAME' => './yii'
+    'PATH_TRANSLATED' => './yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1529056169.0094
+    'REQUEST_TIME' => 1529056169
+    'argv' => [
+        0 => './yii'
+    ]
+    'argc' => 1
+]
+2018-06-15 17:52:43 [-][-][-][error][Error] Error: Class 'Redis' not found in /home/wwwroot/shopyii.guaosi.com/commands/OrderController.php:31
+Stack trace:
+#0 [internal function]: app\commands\OrderController->actionRecover('119.23.20.140', 6379)
+#1 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Controller.php(148): yii\base\Controller->runAction('recover', Array)
+#4 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('recover', Array)
+#5 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('order/recover', Array)
+#6 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('order/recover', Array)
+#7 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#8 /home/wwwroot/shopyii.guaosi.com/yii(20): yii\base\Application->run()
+#9 {main}
+2018-06-15 17:52:43 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HOSTNAME' => 'VM_0_17_centos'
+    'TERM' => 'xterm'
+    'SHELL' => '/bin/bash'
+    'HISTSIZE' => '3000'
+    'SSH_CLIENT' => '106.122.0.209 46059 22'
+    'SSH_TTY' => '/dev/pts/2'
+    'USER' => 'root'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:'
+    'MAIL' => '/var/spool/mail/root'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin'
+    'PWD' => '/home/wwwroot/shopyii.guaosi.com'
+    'LANG' => 'en_US.utf8'
+    'SHLVL' => '1'
+    'HOME' => '/root'
+    'LOGNAME' => 'root'
+    'CVS_RSH' => 'ssh'
+    'SSH_CONNECTION' => '106.122.0.209 46059 172.16.0.17 22'
+    'LESSOPEN' => '||/usr/bin/lesspipe.sh %s'
+    'PROMPT_COMMAND' => 'history -a; printf \"\\033]0;%s@%s:%s\\007\" \"${USER}\" \"${HOSTNAME%%.*}\" \"${PWD/#$HOME/~}\"'
+    'HISTTIMEFORMAT' => '%F %T '
+    'G_BROKEN_FILENAMES' => '1'
+    '_' => '/usr/bin/nohup'
+    'OLDPWD' => '/home/wwwroot'
+    'PHP_SELF' => './yii'
+    'SCRIPT_NAME' => './yii'
+    'SCRIPT_FILENAME' => './yii'
+    'PATH_TRANSLATED' => './yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1529056363.9387
+    'REQUEST_TIME' => 1529056363
+    'argv' => [
+        0 => './yii'
+        1 => 'order/recover'
+    ]
+    'argc' => 2
+]
+2018-06-15 17:54:21 [-][-][-][error][Error] Error: Class 'Redis' not found in /home/wwwroot/shopyii.guaosi.com/commands/OrderController.php:31
+Stack trace:
+#0 [internal function]: app\commands\OrderController->actionRecover('119.23.20.140', 6379)
+#1 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Controller.php(148): yii\base\Controller->runAction('recover', Array)
+#4 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('recover', Array)
+#5 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('order/recover', Array)
+#6 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('order/recover', Array)
+#7 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#8 /home/wwwroot/shopyii.guaosi.com/yii(20): yii\base\Application->run()
+#9 {main}
+2018-06-15 17:54:21 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HOSTNAME' => 'VM_0_17_centos'
+    'TERM' => 'xterm'
+    'SHELL' => '/bin/bash'
+    'HISTSIZE' => '3000'
+    'SSH_CLIENT' => '106.122.0.209 46059 22'
+    'SSH_TTY' => '/dev/pts/2'
+    'USER' => 'root'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:'
+    'MAIL' => '/var/spool/mail/root'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin'
+    'PWD' => '/home/wwwroot/shopyii.guaosi.com'
+    'LANG' => 'en_US.utf8'
+    'SHLVL' => '1'
+    'HOME' => '/root'
+    'LOGNAME' => 'root'
+    'CVS_RSH' => 'ssh'
+    'SSH_CONNECTION' => '106.122.0.209 46059 172.16.0.17 22'
+    'LESSOPEN' => '||/usr/bin/lesspipe.sh %s'
+    'PROMPT_COMMAND' => 'history -a; printf \"\\033]0;%s@%s:%s\\007\" \"${USER}\" \"${HOSTNAME%%.*}\" \"${PWD/#$HOME/~}\"'
+    'HISTTIMEFORMAT' => '%F %T '
+    'G_BROKEN_FILENAMES' => '1'
+    '_' => '/usr/bin/nohup'
+    'OLDPWD' => '/home/wwwroot'
+    'PHP_SELF' => './yii'
+    'SCRIPT_NAME' => './yii'
+    'SCRIPT_FILENAME' => './yii'
+    'PATH_TRANSLATED' => './yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1529056461.0843
+    'REQUEST_TIME' => 1529056461
+    'argv' => [
+        0 => './yii'
+        1 => 'order/recover'
+    ]
+    'argc' => 2
+]
+2018-06-16 01:38:51 [-][-][-][error][Swift_TransportException] Swift_TransportException: Expected response code 220 but got code "500", with message "500 5.5.1 Invalid command
+" in /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php:383
+Stack trace:
+#0 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(281): Swift_Transport_AbstractSmtpTransport->_assertResponseCode('500 5.5.1 Inval...', Array)
+#1 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(270): Swift_Transport_AbstractSmtpTransport->executeCommand('STARTTLS\r\n', Array, Array)
+#2 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(311): Swift_Transport_EsmtpTransport->executeCommand('STARTTLS\r\n', Array)
+#3 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#4 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#5 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2-swiftmailer/Mailer.php(146): Swift_Mailer->send(Object(Swift_Message))
+#6 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/mail/BaseMailer.php(263): yii\swiftmailer\Mailer->sendMessage(Object(guaosiyii\mailerqueue\Message))
+#7 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/mail/BaseMessage.php(49): yii\mail\BaseMailer->send(Object(guaosiyii\mailerqueue\Message))
+#8 /home/wwwroot/shopyii.guaosi.com/vendor/guaosiyii/mailerqueue/src/MailerQueue.php(27): yii\mail\BaseMessage->send()
+#9 /home/wwwroot/shopyii.guaosi.com/commands/MailerController.php(28): guaosiyii\mailerqueue\MailerQueue->process()
+#10 [internal function]: app\commands\MailerController->actionSend()
+#11 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#12 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#13 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Controller.php(148): yii\base\Controller->runAction('send', Array)
+#14 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('send', Array)
+#15 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('mailer/send', Array)
+#16 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('mailer/send', Array)
+#17 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#18 /home/wwwroot/shopyii.guaosi.com/yii(20): yii\base\Application->run()
+#19 {main}
+2018-06-16 01:38:51 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HOSTNAME' => 'VM_0_17_centos'
+    'TERM' => 'xterm'
+    'SHELL' => '/bin/bash'
+    'HISTSIZE' => '3000'
+    'SSH_CLIENT' => '106.122.0.71 60852 22'
+    'OLDPWD' => '/home/wwwroot/shopyii.guaosi.com/config'
+    'SSH_TTY' => '/dev/pts/1'
+    'USER' => 'root'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:'
+    'MAIL' => '/var/spool/mail/root'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin'
+    'PWD' => '/home/wwwroot/shopyii.guaosi.com'
+    'LANG' => 'en_US.utf8'
+    'SHLVL' => '1'
+    'HOME' => '/root'
+    'LOGNAME' => 'root'
+    'CVS_RSH' => 'ssh'
+    'SSH_CONNECTION' => '106.122.0.71 60852 172.16.0.17 22'
+    'LESSOPEN' => '||/usr/bin/lesspipe.sh %s'
+    'PROMPT_COMMAND' => 'history -a; printf \"\\033]0;%s@%s:%s\\007\" \"${USER}\" \"${HOSTNAME%%.*}\" \"${PWD/#$HOME/~}\"'
+    'HISTTIMEFORMAT' => '%F %T '
+    'G_BROKEN_FILENAMES' => '1'
+    '_' => './yii'
+    'PHP_SELF' => './yii'
+    'SCRIPT_NAME' => './yii'
+    'SCRIPT_FILENAME' => './yii'
+    'PATH_TRANSLATED' => './yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1529084331.6218
+    'REQUEST_TIME' => 1529084331
+    'argv' => [
+        0 => './yii'
+        1 => 'mailer/send'
+    ]
+    'argc' => 2
+]
+2018-06-16 02:20:55 [-][-][-][error][Swift_TransportException] Swift_TransportException: Expected response code 220 but got code "500", with message "500 5.5.1 Invalid command
+" in /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php:383
+Stack trace:
+#0 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(281): Swift_Transport_AbstractSmtpTransport->_assertResponseCode('500 5.5.1 Inval...', Array)
+#1 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(270): Swift_Transport_AbstractSmtpTransport->executeCommand('STARTTLS\r\n', Array, Array)
+#2 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(311): Swift_Transport_EsmtpTransport->executeCommand('STARTTLS\r\n', Array)
+#3 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#4 /home/wwwroot/shopyii.guaosi.com/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#5 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2-swiftmailer/Mailer.php(146): Swift_Mailer->send(Object(Swift_Message))
+#6 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/mail/BaseMailer.php(263): yii\swiftmailer\Mailer->sendMessage(Object(guaosiyii\mailerqueue\Message))
+#7 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/mail/BaseMessage.php(49): yii\mail\BaseMailer->send(Object(guaosiyii\mailerqueue\Message))
+#8 /home/wwwroot/shopyii.guaosi.com/vendor/guaosiyii/mailerqueue/src/MailerQueue.php(27): yii\mail\BaseMessage->send()
+#9 /home/wwwroot/shopyii.guaosi.com/commands/MailerController.php(28): guaosiyii\mailerqueue\MailerQueue->process()
+#10 [internal function]: app\commands\MailerController->actionSend()
+#11 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#12 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#13 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Controller.php(148): yii\base\Controller->runAction('send', Array)
+#14 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Module.php(528): yii\console\Controller->runAction('send', Array)
+#15 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(180): yii\base\Module->runAction('mailer/send', Array)
+#16 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/console/Application.php(147): yii\console\Application->runAction('mailer/send', Array)
+#17 /home/wwwroot/shopyii.guaosi.com/vendor/yiisoft/yii2/base/Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#18 /home/wwwroot/shopyii.guaosi.com/yii(20): yii\base\Application->run()
+#19 {main}
+2018-06-16 02:20:54 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HOSTNAME' => 'VM_0_17_centos'
+    'TERM' => 'xterm'
+    'SHELL' => '/bin/bash'
+    'HISTSIZE' => '3000'
+    'SSH_CLIENT' => '106.122.0.71 60852 22'
+    'OLDPWD' => '/home/wwwroot/shopyii.guaosi.com/config'
+    'SSH_TTY' => '/dev/pts/1'
+    'USER' => 'root'
+    'LS_COLORS' => 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:'
+    'MAIL' => '/var/spool/mail/root'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin'
+    'PWD' => '/home/wwwroot/shopyii.guaosi.com'
+    'LANG' => 'en_US.utf8'
+    'SHLVL' => '1'
+    'HOME' => '/root'
+    'LOGNAME' => 'root'
+    'CVS_RSH' => 'ssh'
+    'SSH_CONNECTION' => '106.122.0.71 60852 172.16.0.17 22'
+    'LESSOPEN' => '||/usr/bin/lesspipe.sh %s'
+    'PROMPT_COMMAND' => 'history -a; printf \"\\033]0;%s@%s:%s\\007\" \"${USER}\" \"${HOSTNAME%%.*}\" \"${PWD/#$HOME/~}\"'
+    'HISTTIMEFORMAT' => '%F %T '
+    'G_BROKEN_FILENAMES' => '1'
+    '_' => './yii'
+    'PHP_SELF' => './yii'
+    'SCRIPT_NAME' => './yii'
+    'SCRIPT_FILENAME' => './yii'
+    'PATH_TRANSLATED' => './yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1529086854.9146
+    'REQUEST_TIME' => 1529086854
+    'argv' => [
+        0 => './yii'
+        1 => 'mailer/send'
+    ]
+    'argc' => 2
+]

@@ -1,0 +1,49 @@
+<?php
+/**
+ * Create By guaosi
+ * Author guaosi
+ * Date: 2017/8/24/0024
+ * Time: 21:48
+ */
+namespace app\controllers;
+use app\models\Address;
+use app\models\Comment;
+use Yii;
+class CommentController extends CommonController
+{
+    protected $ismustLogin=['add'];
+    public function actionAdd()
+    {
+        if (Yii::$app->request->isGet)
+        {
+            $post=Yii::$app->request->get();
+            $comment=new Comment();
+            $data['Comment']=[];
+            $data['Comment']['content']=htmlspecialchars($post['content_one_comment']);
+            $data['Comment']['product_id']=$post['productid'];
+            $data['Comment']['score']=$post['score'];
+            $data['Comment']['user_id']= Yii::$app->user->id;
+//            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            if($comment->add($data))
+            {
+                $this->redirect(['index/index']);
+//                return [
+//                    'errorCode'=>1,
+//                    'msg'=>'地址保存成功',
+//                    'address'=>$id
+//                ];
+            }
+            else
+            {
+                var_dump($comment->getErrors());
+//                return [
+//                    'errorCode'=>0,
+//                    'msg'=>'地址保存失败'
+//                ];
+            }
+
+        }
+
+    }
+}

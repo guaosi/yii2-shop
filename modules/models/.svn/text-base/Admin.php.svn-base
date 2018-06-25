@@ -1,0 +1,183 @@
+<?php
+/**
+ * Create By guaosi
+ * Author guaosi
+ * Date: 2017/8/18/0018
+ * Time: 22:58
+ */
+namespace app\modules\models;
+use yii\db\ActiveRecord;
+use Yii;
+class Admin extends ActiveRecord implements \yii\web\IdentityInterface
+{
+    public $rememberMe=true;
+    public $repass;
+    public function attributeLabels()
+    {
+        return [
+            'adminuser'=>'管理员账户',
+            'adminemail'=>'管理员邮箱',
+            'adminpass'=>'管理员密码',
+            'repass'=>'确认密码'
+        ];
+    }
+
+    public static function tableName()
+    {
+        return "{{%admin}}";
+    }
+    public function rules()
+    {
+        return [
+            ['adminuser','required','message'=>'管理员账号不能为空','on'=>['login','seek','adminadd','changeemail']],
+            ['adminuser','unique','message'=>'管理员账号已存在','on'=>['adminadd']],
+            ['adminpass','required','message'=>'管理员密码不能为空','on'=>['login','changepass','adminadd','changeemail']],
+            ['rememberMe','boolean','on'=>'login'],
+            ['adminpass','validatePass','on'=>['login','changeemail']],
+            ['adminemail','required','message'=>'管理员邮箱不能为空','on'=>['seek','adminadd','changeemail']],
+            ['adminemail','unique','message'=>'管理员邮箱已存在','on'=>['adminadd','changeemail']],
+            ['adminemail','email','message'=>'邮箱格式不正确','on'=>['seek','adminadd','changeemail']],
+            ['adminemail','validateEmail','on'=>'seek'],
+            ['repass','required','message'=>'确认密码不能为空','on'=>['changepass','adminadd']],
+            ['repass','compare','compareAttribute'=>'adminpass','message'=>'两次密码不一样','on'=>['changepass','adminadd']]
+
+        ];
+    }
+    public function validatePass()
+    {
+
+        if(!$this->hasErrors())
+        {
+            $data=self::find()->where('adminuser=:user',['user'=>$this->adminuser])->one();
+            if(is_null($data))
+            {
+                $this->addError('adminpass','账号不存在');
+                return false;
+            }
+            if(!Yii::$app->getSecurity()->validatePassword($this->adminpass,$data->adminpass))
+            {
+                $this->addError('adminpass','账号或密码错误');
+            }
+        }
+
+    }
+    public function validateEmail()
+    {
+        if(!$this->hasErrors())
+        {
+            $data=self::find()->where('adminuser=:user and adminemail=:email',['user'=>$this->adminuser,'email'=>$this->adminemail])->one();
+            if(is_null($data))
+            {
+                $this->addError('adminemail','账号与邮箱不匹配');
+            }
+        }
+    }
+    public function getAdmin()
+    {
+        return self::find()->where('adminuser=:name',['name'=>$this->adminuser])->one();
+    }
+    public function login($data)
+    {
+        $this->scenario='login';
+        $this->load($data);
+
+
+        if($this->validate())
+        {
+//            验证成功
+            Yii::$app->admin->login($this->getAdmin(),$this->rememberMe?24*3600:0);
+//            $this->objData->logintime=time();
+//            $this->objData->loginip=ip2long(Yii::$app->request->userIP);
+//            $this->objData->save();
+            $this->updateAll(['logintime'=>time(),'loginip'=>ip2long(Yii::$app->request->userIP)],'adminuser=:user',['user'=>$this->adminuser]);
+            return true;
+        }
+        return false;
+    }
+    public function seekpass($data)
+    {
+        $this->scenario='seek';
+        $this->load($data);
+
+        if($this->validate())
+        {
+//          要做事情
+            $nowtime=time();
+            $adminuser=$this->adminuser;
+            $mail=Yii::$app->mailer->compose('seekpass',['adminuser'=>$adminuser,'time'=>$nowtime,'token'=>$this->createToken($adminuser,$nowtime)]);
+            $mail->setFrom('guaosi@sina.cn');
+            $mail->setTo($this->adminemail);
+           $mail->setSubject('渣渣商城-找回密码');
+           if($mail->send())
+           {
+               return true;
+           }
+        }
+        return false;
+    }
+    public function createToken($adminuser,$nowtime)
+    {
+        return md5(md5($adminuser).base64_encode(Yii::$app->request->userIP).md5($nowtime));
+    }
+    public function changePass($data)
+    {
+      $this->scenario='changepass';
+      $this->load($data);
+      if(Yii::$app->session->hasFlash('adminuser'))
+      {
+          $adminuser=Yii::$app->session->getFlash('adminuser');
+      }
+      else if(!Yii::$app->admin->isGuest)
+      {
+          $adminuser=Yii::$app->admin->identity->adminuser;
+      }
+      if($this->validate())
+      {
+        return (bool)$this->updateAll(['adminpass'=>Yii::$app->getSecurity()->generatePasswordHash($this->adminpass)],'adminuser=:user',['user'=>$adminuser]);
+      }
+      return false;
+    }
+    public function adminadd($data)
+    {
+        $this->scenario='adminadd';
+        $this->load($data);
+        if($this->validate())
+        {
+          $this->adminpass=Yii::$app->getSecurity()->generatePasswordHash($this->adminpass);
+          $this->createtime=time();
+          if($this->save(false))
+          {
+              return true;
+          }
+          return false;
+        }
+        return false;
+    }
+    public function changeEmail($data)
+    {
+      $this->scenario='changeemail';
+      $this->load($data);
+      if($this->validate())
+      {
+
+       return (bool)$this->updateAll(['adminemail'=>$this->adminemail],'adminuser=:user',['user'=>Yii::$app->admin->identity->adminuser]);
+      }
+      return false;
+    }
+    public static function findIdentity($id){
+        return static::findOne($id);
+    }
+    public static function findIdentityByAccessToken($token, $type = null){
+        return null;
+    }
+    public function getId(){
+        return $this->adminid;
+    }
+    public function getAuthKey(){
+        return '';
+    }
+    public function validateAuthKey($authKey){
+        return true;
+    }
+
+}
